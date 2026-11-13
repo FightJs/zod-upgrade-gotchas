@@ -1,0 +1,47 @@
+name: Publish static demo
+
+# No push trigger: publication requires an explicit manual run.
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      - run: npm run build
+        env:
+          VITE_SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}
+      - run: cp THIRD_PARTY_NOTICES.md dist/THIRD_PARTY_NOTICES.txt
+      - run: cp LICENSE dist/LICENSE.txt
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy checked static assets
+        id: deployment
+        uses: actions/deploy-pages@v4

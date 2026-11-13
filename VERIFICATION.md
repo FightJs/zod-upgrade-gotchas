@@ -69,3 +69,40 @@ The browser acceptance script was strengthened to assert both stale badges and o
 - The project intentionally has no project license. None was assigned; public visibility does not grant open-source permissions.
 
 README and the two posts in LAUNCH describe only these observed behaviors. No blocking product defect was found within this scope.
+
+## Lightweight promotion preparation — 2026-11-13
+
+This section records a later **local-only preparation**, not a second publication or a hosted acceptance. Product source, tests, dependencies, Vite configuration and original research were not changed.
+
+### Current external state (read-only checks)
+
+- GitHub repository metadata confirms the existing public `FightJs/zod-upgrade-gotchas`, default branch `main`, `homepage: null`, `license: null`, `has_pages: false`, and a current star count of **0**. This is a baseline observation, not attributed growth.
+- `git ls-remote origin` reports `35c21596881ae52ba588043581bc5db69506028f` for HEAD/main, matching the local HEAD. No existing local tracked changes were present; `PROMOTION.md` was already untracked before preparation and was left unchanged.
+- The authenticated read-only Pages API returned **404**; repository deployments and Actions workflows both returned counts of **0**. The conventional Pages site returned **404**. No configured/documented live demo was found; this does not establish the state of unknown external hosts.
+- Local and remote root file listings contain no project LICENSE file. Existing README and third-party notices state that the project has no declared license. No license was chosen.
+
+### Prepared assets and actual local checks
+
+- README now leads with the two-passes/different-output finding, a truthful pending-demo notice and local experience entry, a readable result image, and the real source link. No hypothetical live URL is presented as a working demo.
+- `docs/images/default-partial-results.png` is a **1088 × 300** crop at x=96, y=862 from the existing 1280 × 1232 screenshot. The original file is unchanged (SHA-256 `57c88f26d5e4a0b6f6066a57d407000590b76fa4fb715d24bfdfef3f0003d2fd`). Both the original and crop were visually inspected; results were not redrawn.
+- LAUNCH contains one Chinese article and one English short post. The English copy has **221 Unicode code points**, below both 280 and 300. The article's actual code block was extracted and executed with installed real packages; its default input produced the stated two different outputs, and its a/b-complete control produced equal outputs. Both assertions passed.
+- `npm test`: **9 passed, 0 failed**. `npm run check` and `npm run build`: **exit 0** under Node **20.13.0**, npm **10.8.0**. The two previously recorded upstream annotation warnings remain; no warnings were suppressed.
+- `.github/workflows/pages.yml` is local and **manual-only**. Ruby's YAML parser accepted it, and assertions confirmed only `workflow_dispatch`, a `dist` artifact, and read-only build defaults. No GitHub-hosted run or dedicated Actions schema linter was executed. CI selects Node 22; this preparation did not rerun locally on Node 22.
+- The workflow copies the existing third-party notice into the static artifact. That copy step was executed locally. A temporary plain HTTP server successfully served the built index under `/zod-upgrade-gotchas/`, its JS/CSS/favicon and byte-identical `THIRD_PARTY_NOTICES.txt`. This was an HTTP asset check, **not** a new browser interaction or public HTTPS acceptance. An initial probe closed asset responses before reading them and caused a test-server BrokenPipe; the corrected probe read complete responses and passed without server errors.
+- Local Markdown file/image targets and `git diff --check` passed. Original screenshot, runtime source, tests and manifests remain unchanged. Existing browser results above are historical evidence, not newly rerun browser checks for this documentation-only preparation.
+
+### Channel rules and remaining authorization
+
+HN's current guidelines returned HTTP 200 and explicitly prohibit generated/AI-edited text and soliciting upvotes/comments/submissions. These AI-assisted drafts are excluded from HN. Bluesky's official guideline URL returned HTTP 403, so its current text was not verified. No Chinese platform/account has been selected or cleared; X and subreddit rules were not verified in this preparation. Platform review remains necessary before any authorized post; forbidden platforms cannot use these drafts.
+
+No commit, remote push, repository setting change, license selection, deployment, workflow dispatch, community post, directory submission or contact with others was performed. No post URL, impression count, independent citation or star growth is claimed. No video was recorded; the existing real screenshot is the release visual.
+
+Publisher decisions are consolidated in LAUNCH and DEPLOYMENT: license choice or explicit unlicensed status; exact remote push and GitHub Pages publication authorization; then specific Chinese/English channels/accounts and posting authorization after rule review and hosted verification. Public HTTPS clipboard behavior, case-link refresh, source backlink and narrow-layout acceptance remain unverified until a real deployment is authorized and performed.
+
+## Authorized publication follow-through — 2026-11-13
+
+After reviewing the prepared files, the publisher replied that all listed actions were allowed. This supersedes the earlier local-only boundary for license selection, push, Pages setup/deployment and posting. MIT was selected for the application's own code and documentation; the original Zod copyright/license text remains intact. LICENSE is copied into the static artifact alongside the dependency notices.
+
+Before pushing, `npm test` passed all 9 tests, `npm run check` and `npm run build` exited 0, workflow YAML/manual trigger assertions passed, and the local/remote main HEADs both matched `35c21596881ae52ba588043581bc5db69506028f`. The two previously documented upstream annotation warnings remain. Product code and dependency manifests were not changed. Only explicitly reviewed application files are staged; the pre-existing untracked PROMOTION.md is excluded.
+
+Posting is authorized, but the exact Chinese/English platforms and account targets are still missing; they have been requested separately. No post is claimed. Hosted deployment and browser results will be recorded after they actually complete.

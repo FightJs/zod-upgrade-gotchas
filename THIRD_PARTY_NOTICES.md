@@ -1,6 +1,6 @@
 # Third-party notices
 
-The following license applies only to the Zod dependency code, not to this application. This project has no project license.
+The following license applies only to the Zod dependency code, not to this application. The application has its own MIT license in LICENSE; third-party copyrights remain unchanged.
 
 - zod-v3: npm alias for zod 3.25.76
 - zod-v4: npm alias for zod 4.6.7

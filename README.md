@@ -1,16 +1,18 @@
 # Zod Upgrade Gotchas
 
-Compare three real Zod 3 → 4 behavior changes in your browser before relying on parsed data.
+**Zod 3 → 4: both validators can pass while their parsed outputs differ.**
 
-A small, independent reference: choose one of three fixed schemas, edit JSON, and compare real results from **Zod 3.25.76** and **Zod 4.6.7**. Both passing validation does not mean both returning the same data.
+Run three fixed upgrade cases in your browser using the actual **Zod 3.25.76** and **4.6.7** packages. Edit JSON and compare the returned data or original issues.
 
-**Source:** [FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas). **Online demo:** not deployed; no live demo URL is available.
+**Try it:** online demo not deployed yet. [Run locally](#run-locally) to try it now. [Static deployment is prepared](DEPLOYMENT.md), not published.
 
-## Real result
+Same input: `{"b":"changed"}`. Both pass; only v4 adds the omitted default field:
 
-![Production preview: both versions pass, but only Zod 4 adds the omitted default field](docs/images/default-partial.png)
+![Real result: Zod 3 returns only b; Zod 4 also returns a, with both validations passing](docs/images/default-partial-results.png)
 
-Captured from the local production preview on 2026-11-13 with the default input, using the installed packages. Both badges say Passed, while the parsed outputs differ. This is an actual browser screenshot, not a mockup.
+A crop of the [original production-preview screenshot](docs/images/default-partial.png), captured on 2026-11-13. No results were redrawn or synthesized.
+
+**Source:** [FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas) · [Three-case quick reference](#quick-reference). This is an independent reference, not a project compatibility audit.
 
 ## Run locally
 
@@ -110,13 +112,13 @@ Serve `dist/` from any static host after `npm run build`. Relative asset URLs su
 
 English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). The source link is real; the public demo is explicitly marked as not deployed.
 
-The page's source link defaults to this repository. `VITE_SOURCE_URL` can override it at build time. No deployment, GitHub Pages setup, or hosting connection is included.
+The page's source link defaults to this repository. `VITE_SOURCE_URL` can override it at build time. A manual-only GitHub Pages workflow is prepared locally; see [DEPLOYMENT.md](DEPLOYMENT.md). No Pages setting was changed and no public deployment was performed.
 
-## License status
+## License
 
-This project has **no project license**. Making the repository public does not grant an open-source license or general permission to use, modify, or redistribute the project. No MIT or other project license has been assigned.
+This application is licensed under the [MIT License](LICENSE), selected with the publisher's authorization on 2026-11-13.
 
-Third-party dependencies retain their own licenses and copyrights. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) preserves the license and copyright notice for the two Zod runtime packages; that notice applies to Zod, not to this application.
+Third-party dependencies retain their own licenses and copyrights. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) preserves the two Zod runtime packages' license and copyright notices. Static deployment includes both `LICENSE.txt` and `THIRD_PARTY_NOTICES.txt`.
 
 ## Contributing verified cases
 
