@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Three Zod upgrade gotchas you can run in your browser. Compare real Zod 3.25.76 and 4.6.7 results." />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <title>Zod Upgrade Gotchas</title>
+</head>
+<body>
+  <div id="app">
+    <header class="masthead"><a class="wordmark" href="#case=default-partial"><span class="mark" aria-hidden="true">z.</span> Zod Upgrade Gotchas</a><span id="source"><a href="https://github.com/FightJs/zod-upgrade-gotchas" target="_blank" rel="noreferrer">Source on GitHub ↗</a></span></header>
+    <main>
+      <div class="intro"><p class="eyebrow">THREE CASES. TWO REAL RELEASES.</p><h1>A small upgrade.<br>A different result.</h1><p>Three Zod upgrade gotchas you can run in your browser.<br>Edit the JSON. See what each version actually returns.</p><span class="version-note">Zod 3.25.76 <span aria-hidden="true">→</span> 4.6.7 <span class="separator">/</span> Runs locally in your browser</span></div>
+      <nav class="cases" aria-label="Choose a case" id="cases"></nav>
+      <section class="workbench" aria-labelledby="question">
+        <div class="case-heading"><div><p class="eyebrow" id="case-number"></p><h2 id="question"></h2></div><button id="share" type="button">Share case <span aria-hidden="true">↗</span></button></div>
+        <p id="explanation" class="explanation"></p><a id="reference" target="_blank" rel="noreferrer">Source</a>
+        <div class="editors">
+          <section class="schema"><h3>Schema <span>read only · same in both versions</span></h3><pre><code id="schema"></code></pre></section>
+          <form id="form" novalidate><div class="input-heading"><label for="input">JSON input</label><button type="button" id="reset" class="text-button">Restore default</button></div><textarea id="input" spellcheck="false" aria-describedby="limits input-status"></textarea><div class="run-row"><span id="limits">Max 20 KiB · 20 levels deep</span><button type="submit" class="primary">Run both versions <span aria-hidden="true">→</span></button></div></form>
+        </div>
+        <p id="input-status" class="input-status" role="status" aria-live="polite"></p>
+        <div class="results-heading"><h3>Actual results</h3><button id="copy" type="button">Copy reproduction code</button></div>
+        <div class="results">
+          <section class="result" aria-labelledby="version-3"><div class="result-heading"><h4 id="version-3">Zod <span>3.25.76</span></h4><span id="status-3" class="badge"></span></div><p id="label-3" class="result-label"></p><pre id="result-3" tabindex="0" aria-label="Zod 3 result"></pre></section>
+          <section class="result" aria-labelledby="version-4"><div class="result-heading"><h4 id="version-4">Zod <span>4.6.7</span></h4><span id="status-4" class="badge"></span></div><p id="label-4" class="result-label"></p><pre id="result-4" tabindex="0" aria-label="Zod 4 result"></pre></section>
+        </div>
+        <p class="result-note">Two passes do not guarantee equal outputs. Two failures do not guarantee equal issues.</p>
+        <p id="copy-status" role="status" aria-live="polite"></p>
+        <section id="fallback" hidden><label for="copy-text">Clipboard unavailable. Select and copy this text manually.</label><textarea id="copy-text" readonly spellcheck="false"></textarea></section>
+      </section>
+    </main>
+    <footer><span>An independent reference, not an official Zod tool.</span><span>JSON stays in memory. Shared links contain only the case ID.</span></footer>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
