@@ -1,10 +1,10 @@
 # Launch material — unpublished
 
-Status checked on 2026-11-13: [source repository](https://github.com/FightJs/zod-upgrade-gotchas) is public; the demo is pending deployment. The application now has an MIT license, selected with publisher authorization. All text below is an **AI-assisted draft for publisher review**, not a published post. The repository includes LICENSE and preserves third-party notices.
+Status checked on 2026-11-13: [source repository](https://github.com/FightJs/zod-upgrade-gotchas) is public; the [HTTPS demo](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial) is live and has passed browser acceptance. The application now has an MIT license, selected with publisher authorization. All text below is an **AI-assisted draft for publisher review**, not a published post. The repository includes LICENSE and preserves third-party notices.
 
 Use one Chinese technical article and one English short post, both with `docs/images/default-partial-results.png`. It is a crop of the existing genuine screenshot, not a generated demonstration. Full capture: `docs/images/default-partial.png`.
 
-The drafts below are truthful before hosting: they link to the real source and say the demo is pending. After authorized deployment and actual HTTPS acceptance, replace the pending-demo line with the verified default-case URL. Do not post the proposed Pages address before it works.
+The drafts link to the verified demo and real source repository. Deployment and draft preparation do not mean a community post was published. Posting remains pending the exact platform/account targets and applicable rule checks.
 
 ## 中文技术文章草稿
 
@@ -64,7 +64,7 @@ for (const [version, z] of [['3.25.76', v3], ['4.6.7', v4]]) {
 
 Zod Upgrade Gotchas 把这个例子和另外两个边界变化放在一页：可以选择案例、编辑 JSON、运行两版、恢复默认、复制完整复现代码。分享链接只包含固定案例 ID，打开后运行默认输入，不携带你的修改。
 
-目前**在线 Demo 尚未部署**。可以从[源码仓库](https://github.com/FightJs/zod-upgrade-gotchas)取回工程，运行 `npm ci`、`npm run dev` 本地体验。页面的实际结果由两个包计算，不是预设的演示答案。
+**[在线体验这个案例](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)**，无需注册或安装。也可以从[源码仓库](https://github.com/FightJs/zod-upgrade-gotchas)取回工程，运行 `npm ci`、`npm run dev` 本地体验。页面的实际结果由两个包计算，不是预设的演示答案。
 
 这只是三个固定行为的参考，不会扫描你的项目，也不会自动迁移代码。升级时除了关注校验能否通过，还应检查解析结果是否保持了业务所需的字段语义。
 
@@ -75,10 +75,10 @@ Zod Upgrade Gotchas 把这个例子和另外两个边界变化放在一页：可
 The following single post is under 280 characters, including its literal repository URL. Attach the same cropped screenshot; no thread or mass mentions are needed.
 
 <!-- english-post:start -->
-Both pass, different data.
-Zod 3.25.76 → 4.6.7: .default() inside .partial() adds an omitted field in v4. Try {"b":"changed"}.
-Three real-package examples; demo not live yet:
-https://github.com/FightJs/zod-upgrade-gotchas
+Zod 3.25.76 → 4.6.7: both pass, different output.
+With .default() + .partial(), {"b":"changed"} gains "a":"a" in v4.
+Try: https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial
+Source: https://github.com/FightJs/zod-upgrade-gotchas
 <!-- english-post:end -->
 
 Image alt text: “Input: {b: 'changed'}. Zod 3.25.76 and 4.6.7 both pass. v3 returns only b; v4 also returns a: 'a'.”

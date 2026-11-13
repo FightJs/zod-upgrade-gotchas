@@ -4,7 +4,7 @@
 
 Run three fixed upgrade cases in your browser using the actual **Zod 3.25.76** and **4.6.7** packages. Edit JSON and compare the returned data or original issues.
 
-**Try it:** online demo not deployed yet. [Run locally](#run-locally) to try it now. [Static deployment is prepared](DEPLOYMENT.md), not published.
+**[Try the live default case](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)** · [Run locally](#run-locally) · [Deployment details](DEPLOYMENT.md)
 
 Same input: `{"b":"changed"}`. Both pass; only v4 adds the omitted default field:
 
@@ -16,7 +16,7 @@ A crop of the [original production-preview screenshot](docs/images/default-parti
 
 ## Run locally
 
-Use Node.js 22 LTS and npm. This acceptance run used Node 20.13.0 and npm 10.8.0; `npm ci`, all 9 tests, TypeScript, and the production build passed in that environment.
+Use Node.js 22 LTS and npm. Local acceptance passed under Node 20.13.0 / npm 10.8.0; GitHub Pages CI additionally passed installation, all 9 tests, TypeScript and the production build under Node 22.23.4.
 
 ```sh
 git clone https://github.com/FightJs/zod-upgrade-gotchas.git
@@ -40,9 +40,9 @@ These are observed default results, not simulated fixtures in the webpage. Both 
 
 | Case / fixed fragment | Input | Zod 3.25.76 | Zod 4.6.7 |
 | --- | --- | --- | --- |
-| Defaults + partial | `{"b":"changed"}` | Pass → `{"b":"changed"}` | Pass → `{"a":"a","b":"changed"}` |
-| Integer range | `9007199254740992` | Pass → `9007199254740992` | Fail → `too_big`, maximum `9007199254740991` |
-| Enum-key record | `{"a":1}` | Pass → `{"a":1}` | Fail → `invalid_type` at `["b"]`, expected `number` |
+| [Defaults + partial](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial) | `{"b":"changed"}` | Pass → `{"b":"changed"}` | Pass → `{"a":"a","b":"changed"}` |
+| [Integer range](https://fightjs.github.io/zod-upgrade-gotchas/#case=integer-range) | `9007199254740992` | Pass → `9007199254740992` | Fail → `too_big`, maximum `9007199254740991` |
+| [Enum-key record](https://fightjs.github.io/zod-upgrade-gotchas/#case=enum-record) | `{"a":1}` | Pass → `{"a":1}` | Fail → `invalid_type` at `["b"]`, expected `number` |
 
 To open a fixed case, append `#case=default-partial`, `#case=integer-range`, or `#case=enum-record` to the running app URL.
 
@@ -94,7 +94,7 @@ Two separate published packages are pinned via npm aliases, not the `/v3` entry 
 
 ## Browser verification
 
-The production build was exercised in Chromium at desktop, 375px, and 320px widths on 2026-11-13. See [VERIFICATION.md](VERIFICATION.md) for outcomes and gaps. The release screenshot above is included in `docs/images/`; additional local screenshots and the latest browser log are under `output/playwright/` (ignored by Git).
+The public HTTPS demo was exercised in Chromium at desktop, 375px, and 320px widths on 2026-11-13. All three fixed links open and refresh with their defaults; clipboard, source backlink and interaction checks passed. See [VERIFICATION.md](VERIFICATION.md) for outcomes and gaps. The release screenshot above is included in `docs/images/`; additional local screenshots and the latest browser log are under `output/playwright/` (ignored by Git).
 
 To repeat the browser assertions, start `npm run preview` on port 4173 in another terminal, then use the Playwright CLI (a test-only tool, not an app dependency):
 
@@ -108,11 +108,11 @@ A compatible Chromium/Chrome installation is required. Browser tests use real cl
 
 ## Static publication
 
-Serve `dist/` from any static host after `npm run build`. Relative asset URLs support a subdirectory. Hash-based case links need no server rewrite rules. No public deployment has been tested in this acceptance run.
+The [live demo](https://fightjs.github.io/zod-upgrade-gotchas/) is hosted on GitHub Pages. The [first deployment and its checks](https://github.com/FightJs/zod-upgrade-gotchas/actions/runs/43445983076) succeeded on 2026-11-13; the hosted HTTPS acceptance is recorded in [VERIFICATION.md](VERIFICATION.md).
 
-English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). The source link is real; the public demo is explicitly marked as not deployed.
+The manual-only workflow builds and publishes `dist/`, including the application license and third-party notices. Relative asset URLs and hash-based case links work under the project subdirectory without server rewrites. Pushing a commit does not trigger a deployment automatically; see [DEPLOYMENT.md](DEPLOYMENT.md).
 
-The page's source link defaults to this repository. `VITE_SOURCE_URL` can override it at build time. A manual-only GitHub Pages workflow is prepared locally; see [DEPLOYMENT.md](DEPLOYMENT.md). No Pages setting was changed and no public deployment was performed.
+English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). These remain unpublished drafts awaiting the publisher's platform/account targets. The page's source link defaults to this repository; `VITE_SOURCE_URL` can override it at build time.
 
 ## License
 

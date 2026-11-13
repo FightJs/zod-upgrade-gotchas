@@ -1,27 +1,25 @@
 # Static demo: GitHub Pages
 
-**Authorized for publication; deployment pending verification.** The existing public repository is [FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas). On 2026-11-13 it had no Pages site, no homepage URL, and no project license at the initial inspection. MIT has since been selected with publisher authorization. No new repository, hosting account, domain, or server is needed.
+**Live:** [https://fightjs.github.io/zod-upgrade-gotchas/](https://fightjs.github.io/zod-upgrade-gotchas/) · **[Default case](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)**
 
-## Ready for review
+The publisher authorized MIT licensing, remote push, Pages setup/deployment and posting on 2026-11-13. The [first Pages run](https://github.com/FightJs/zod-upgrade-gotchas/actions/runs/43445983076) successfully built and deployed application commit `dcedf55587968d524dd940042e9e78ebfa4bc476`. The repository homepage now points to this actual demo. Subsequent documentation-only commits do not change its runtime assets.
 
-`.github/workflows/pages.yml` installs from the lockfile, runs tests and TypeScript checks, builds with the real source URL, copies the existing Zod notices into `dist/THIRD_PARTY_NOTICES.txt`, copies the application license into `dist/LICENSE.txt`, and uploads only `dist/` using the official GitHub Pages actions. Node 22 is selected for CI. Existing Vite `base: './'` supports the project subpath; no app change is needed. There is **only `workflow_dispatch`**, so pushing the file alone does not run a deployment.
+## What is deployed
 
-GitHub Actions permissions are read-only during build; only the deploy job has `pages: write` and `id-token: write`. No hosting secrets or custom backend are used. `node_modules`, research files, local browser output and drafts are outside the uploaded artifact.
+`.github/workflows/pages.yml` installs from the lockfile, runs the 9 tests and TypeScript checks, and builds with Node 22 and the real GitHub source URL. It copies the application MIT license and existing Zod notices into `dist/LICENSE.txt` and `dist/THIRD_PARTY_NOTICES.txt`. Only `dist/` is uploaded with official GitHub Pages actions.
 
-## After the publisher authorizes push and public hosting
+Vite's existing `base: './'` and case fragments support the project subdirectory without rewrites. No app feature, hosting secret, server, domain purchase or analytics system was added. Build permissions are read-only; only the deploy job receives `pages: write` and `id-token: write`.
 
-1. Review the local diff and commit/push the approved application files to the existing repository. `PROMOTION.md` was already untracked when this preparation began; review it separately rather than adding every untracked file.
-2. In repository **Settings → Pages → Build and deployment**, select **GitHub Actions**. The publisher has authorized publication and the application has an MIT license; preserve LICENSE. Preserve `THIRD_PARTY_NOTICES.md`.
-3. In **Actions → Publish static demo → Run workflow**, choose the approved branch (normally `main`). Review the checks and deploy result. Follow the actual environment URL emitted by `actions/deploy-pages`.
-4. At that real HTTPS URL, verify defaults, edit/run/reset, copied reproduction, all three `#case=...` links opened/refreshed, clipboard fallback, narrow layout, and the source backlink. Local checks do not establish hosted HTTPS success.
-5. Only then replace the pending-demo text in README and LAUNCH with the verified URL and record the hosted result in VERIFICATION. Updating the repository homepage is also an external setting change and needs authorization.
+The workflow has **only `workflow_dispatch`**. Pushing a file alone does not publish a new build.
 
-The default address **would normally be** the following, but it returned 404 during preparation and is not a live demo link:
+## Later approved updates
 
-```text
-https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial
-```
+1. Review and push the intended files to the existing repository. Do not add every untracked file; local PROMOTION.md was excluded from this publication.
+2. In **Actions → Publish static demo → Run workflow**, select the approved branch (normally `main`). Repository Pages settings already use the GitHub Actions source.
+3. Wait for the checks and deployment to succeed. Verify the actual HTTPS default, edit/run/reset, copying, all three fixed links opened/refreshed, narrow layout and source backlink. Record the result in VERIFICATION; do not equate a successful build with a successful hosted interaction check.
 
-For local inspection, run `npm run build` and `npm run preview`. To remove a published demo later, use GitHub Pages' Unpublish site control; deleting a workflow alone does not unpublish existing content.
+The current demo passed these hosted Chromium checks, including 375px and 320px layouts. License/notice URLs returned HTTP 200 and matched the local files byte-for-byte. See [VERIFICATION.md](VERIFICATION.md) for exact evidence and remaining browser/device limitations.
 
-Reference: [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) (HTTP 200 checked on 2026-11-13). The remote workflow, environment permissions and actual hosted URL remain untested until authorized publication.
+To unpublish later, use GitHub Pages' **Unpublish site** control. Deleting the workflow alone does not unpublish existing content.
+
+Reference: [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
