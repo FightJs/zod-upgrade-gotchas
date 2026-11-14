@@ -96,3 +96,51 @@ X.txt    ebfec5762a4de9d03f01ea0e830ae0d63cc45f55ab29be3fabbe565c194c8d6d
 Publish only this intended technical article, keep the explicit AI-assisted declaration, use the genuine relevant image, keep access free/public, leave GitCode backup off and multi-platform publication No, and do not enroll it in unrelated contests or paid programs. Verify the rendered preview before submitting. After submission, distinguish “submitted/pending review” from a publicly readable publication and record the actual final URL/state.
 
 The X file hash is unchanged from the prior approved draft; its **94/100** approval remains valid with the planned genuine screenshot and the authorized X account. This review still does not guarantee readership, platform recommendation or awards.
+
+
+## Source-entry correction — CSDN round 3 / X contextual reply round 1 (2026-11-14)
+
+The user explicitly requested more visible GitHub entry points after publication: the X original contained the demo but no direct repository link, while CSDN's repository link was too far down. This review covers **one edit to the existing CSDN article** and **one contextual reply by the original X author**, not deletion/reposting, duplicate articles, mass replies or a promotional campaign.
+
+### Exact scope and evidence
+
+- Compared the revised CSDN file against the published source in Git HEAD. Removing the single new repository/demo/optional-Star block makes the files identical. **All 7 code blocks are byte-identical** to the already independently executed/published source; no technical assertion, mitigation, AI disclosure or validation scope was removed or altered. Re-executing unchanged snippets was unnecessary for this source-link-only change.
+- The inserted CSDN block follows the two-paragraph technical opening and precedes the AI-assistance disclosure. It prominently identifies the actual MIT repository and working case link, invites a voluntary GitHub Star for later retrieval, and explicitly says access is not Star-gated. The complete technical article remains present.
+- The new X reply has **195 Unicode code points**, contains the actual repository's direct HTTPS URL and MIT label, and explicitly states that a Star is not required for the demo/examples. It is intended only as an author reply under [the existing technical post](https://x.com/Dearzxcte/status/2121431356874097064).
+- The existing repository LICENSE/README establish MIT licensing; prior verification establishes the real demo and source destinations. The original X text hash remains unchanged. Platform assessment uses the already recorded CSDN complete-content/anti-hard-advertising and X authenticity/anti-spam rules; this is not a claim of platform preapproval.
+
+Reviewed input SHA-256 values:
+
+```text
+CSDN.md          8e36d1d7ccad0defdcf14e6f64f9c94add367d691098617307ce9af0afba5de2
+X-repo-reply.txt 6e1272fcc6fdc0b8550f8dbe41b576471099ea9dba45b100dc505fca5c4971ee
+X.txt            ebfec5762a4de9d03f01ea0e830ae0d63cc45f55ab29be3fabbe565c194c8d6d
+```
+
+### Revised CSDN full article
+
+| Dimension | Score | Assessment |
+| --- | ---: | --- |
+| Technical accuracy | **30/30** | Technical content and all executable blocks remain unchanged; the new direct-source and MIT statements match the real repository. |
+| Practical value / reproducibility | **24/25** | Repository and live-case entries are now available before the long explanation, making source/reproduction discovery easier. All detailed examples and regression checks remain intact. The previously disclosed lack of real-ORM integration remains. |
+| Title / structure / readability | **18/20** | The descriptive title and technical hook remain first. The short new action block is visible without replacing the tutorial. It adds a little promotional repetition, so no readability score increase is granted. |
+| Platform fit | **14/15** | A relevant source link and voluntary bookmark-style Star invitation accompany a complete free technical article. No sales, paid access, withheld solution, contact diversion, traffic manipulation or mass duplication is introduced. Final rendered edit and platform review still require observation. |
+| Trust / sourcing / compliance | **9/10** | Explicit MIT source, genuine demo, AI disclosure and full evidence remain. A Star is optional and does not unlock content. No reward, reciprocity, fabricated adoption, award or guaranteed growth is promised. |
+| **Total** | **95/100** | All dimensions ≥80%; no factual or known applicable-policy hard blocker. |
+
+**Decision: PASSED for editing the existing CSDN article** on dear zxc / qq_73599840. Preserve the genuine hosted image, AI-assisted declaration, free/public access, existing title/content and prior no-backup/no-cross-post settings. Verify that the visible public article has the new direct repository entry; submission alone is not proof of public availability.
+
+### New X contextual repository reply
+
+| Dimension | Score | Assessment |
+| --- | ---: | --- |
+| Technical accuracy | **30/30** | The reply makes a correct MIT/source statement, introduces no new Zod behavior claim and clearly preserves unconditional access. |
+| Practical value / reproducibility | **23/25** | It supplies the missing direct repository entry under the original reproduced example. Detailed reproduction remains in the parent demo/repository instead of being duplicated in this short reply. |
+| Title / structure / readability | **18/20** | The source URL leads immediately, followed by one short optional retrieval suggestion. No standalone title is expected for this reply. The two free/no-Star clauses are slightly repetitive but clear. |
+| Platform fit | **14/15** | One relevant author reply on the original technical post, with no tags, unsolicited mentions, duplicate posting, deletion/repost loop or bulk promotion. A voluntary GitHub bookmark invitation with no reward or condition is not engagement manipulation under the inspected rule evidence. Final thread placement must be verified. |
+| Trust / sourcing / compliance | **9/10** | Direct transparent destination, no incentive/reciprocity, no Star-gated feature and no claims about results of promotion. “Stay free” is understood as the declared current product/access policy, not a guarantee of perpetual hosted uptime. |
+| **Total** | **94/100** | All dimensions ≥80%; no factual or known applicable-policy hard blocker. |
+
+**Decision: PASSED for a single reply** by Dearzxc / @Dearzxcte beneath the existing post at status `2121431356874097064`. Do not send it as an unrelated new post or repeat it under others' posts. Keep the original post, actual result image and disclosure intact. Record the reply's own actual URL and its visible thread placement after posting.
+
+These approvals apply to the exact reviewed files and scoped corrective actions. They do not promise any Star conversion, reach or award and do not authorize artificial engagement or repeated promotion. No corrective edit/reply is claimed completed by this review.

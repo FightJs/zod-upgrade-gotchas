@@ -4,6 +4,10 @@
 
 下面这个例子值得多看一眼：**请求里没有 `a`，两版校验都通过，但新版解析结果里出现了 `a`。** 如果 PATCH 接口直接把解析结果作为更新数据，原本“没传就不更新”的约定就可能被改变。
 
+**项目源码（MIT）：[github.com/FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas)** · [在线运行三个真实案例](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)
+
+如果这个对照能帮你检查下次 Zod 升级，欢迎在 GitHub 点个 **Star**，方便以后找到。体验和复现代码始终开放，不设 Star 门槛。
+
 > 创作说明：本文使用 AI 辅助撰写。代码与对照结果已在两个真实发行包上执行验证，截图来自真实页面；PATCH 数据更新是用于说明影响的模拟场景，不是虚构的线上事故。
 
 ## 先看结果：成功不等于行为相同

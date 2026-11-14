@@ -138,3 +138,11 @@ The publisher explicitly selected CSDN and X, identified the existing logged-in 
 - Full publication state, platform checks, source copy and local screenshot locations: [docs/promotion/PUBLISHED.md](docs/promotion/PUBLISHED.md). These screenshots were visually inspected. No independent readership, star growth, award or recommendation claim is made from these posts or editorial scores.
 
 This follow-through changes publication documentation only. Product code, dependencies, original screenshot and parent-directory research remain unchanged. Existing browser/platform limitations and future moderation/traffic uncertainty still apply. The public article Copy button was not separately tested after publication; exact code preservation was verified in the editor before submission.
+
+## Repository discoverability correction — 2026-11-14
+
+After user feedback, the existing CSDN article was edited to place the exact MIT GitHub source link near the opening, with an optional Star reminder. Its public page was reopened and the actual href independently read as `https://github.com/FightJs/zod-upgrade-gotchas`. Existing technical/code content was preserved.
+
+One source reply was posted under the existing X post, at https://x.com/Dearzxcte/status/2121442463655313828 . Its actual thread placement, repository card, English document title and Made with AI label were verified. The original post was not deleted/reposted. No paid boost, Star gate, reciprocity or traffic manipulation was used.
+
+The independent reviewer approved the corrective CSDN draft at 95/100 and the single reply at 94/100 before publication. Exact updated hashes and scope are in REVIEW.md. The two final browser screenshots were saved and visually inspected. This confirms visible source entries, not any Star growth or conversion outcome.

@@ -1,0 +1,2 @@
+Source (MIT): https://github.com/FightJs/zod-upgrade-gotchas
+If this helps with your next Zod upgrade, a GitHub star makes it easy to find again. The demo and examples stay free—no star required.

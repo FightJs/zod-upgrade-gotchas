@@ -9,6 +9,8 @@ The user authorized publication on CSDN and X. Both pieces were published on **2
 
 **[Live example](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)** · **[MIT source repository](https://github.com/FightJs/zod-upgrade-gotchas)**
 
+A [direct GitHub source reply](https://x.com/Dearzxcte/status/2121442463655313828) was subsequently added under the original X post. CSDN now also presents the repository prominently near the opening; both have an optional, ungated Star reminder.
+
 ## Reusable source and evidence
 
 - [Actual Chinese source](docs/promotion/CSDN.md): result-first explanation, two real npm aliases, simulated PATCH consequence, business-specific schema strategy, executable regression checks and a migration checklist.
