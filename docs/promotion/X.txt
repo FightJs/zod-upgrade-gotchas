@@ -1,0 +1,3 @@
+A Zod upgrade can pass validation—and still change a PATCH.
+3.25.76 → 4.6.7: with .default() + .partial(), {"b":"changed"} also returns "a":"a" in v4.
+Try both real packages: https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial

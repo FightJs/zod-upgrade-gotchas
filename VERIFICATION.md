@@ -1,6 +1,6 @@
 # Release acceptance — 2026-11-13
 
-**Current status:** MIT-licensed and publicly deployed at https://fightjs.github.io/zod-upgrade-gotchas/. Hosted browser acceptance passed; see the final section below. Earlier sections preserve the state at the time of each check. No community post has been published.
+**Current status:** MIT-licensed and publicly deployed at https://fightjs.github.io/zod-upgrade-gotchas/. Hosted browser acceptance passed; see the final section below. Earlier sections preserve the state at the time of each check. The reviewed CSDN and X posts were published on 2026-11-14; see the latest section below.
 
 Scope: local acceptance and publication of the application source at https://github.com/FightJs/zod-upgrade-gotchas. No deployment, GitHub Pages setup, hosting connection, post, or contact with others. The only runtime change is the real source-link default; no product features were added.
 
@@ -125,3 +125,16 @@ Only documentation changed after the deployed application commit; no runtime ass
 **Posting status:** permission is granted, but the Chinese and English platforms/accounts have not been supplied. No community post, directory submission, contact, post URL or promotion result is claimed. HN remains excluded because these are AI-assisted drafts; other platform rules must be checked once targets are known. No new statistics system or tracking was added.
 
 **Remaining validation gaps:** Safari/Firefox, physical devices, screen readers/full accessibility conformance, and real OS-level clipboard denial are still unverified. Chromium's successful real HTTPS clipboard/share tests supersede the earlier hosted-clipboard gap. Actual cross-device sharing was not tested. No natural Zod crash was induced in the hosted browser; the runner exception path remains covered by automated tests.
+
+## Reviewed CSDN and X publication — 2026-11-14
+
+The publisher explicitly selected CSDN and X, identified the existing logged-in Chrome sessions, authorized posting and requested an independent scoring agent. No additional posting permission was requested. An initial generic CSDN creation route produced a login page; the original user tab's actual 创作 link correctly entered the authenticated editor, so that initial login inference was corrected.
+
+- CSDN actual article: https://blog.csdn.net/qq_73599840/article/details/170767797 (dear zxc / qq_73599840). Submission initially showed success/under review; the actual article page subsequently displayed **公开** and rendered the full title, body and genuine image. A separate final manual moderation notice was not received.
+- X actual English post: https://x.com/Dearzxcte/status/2121431356874097064 (@Dearzxcte). The original English text, genuine result image, ALT text and **Made with AI** disclosure were verified on the actual post detail page, and a final screenshot was saved.
+- Independent sub-agent `publication_reviewer` applied accuracy/utility/readability/platform/trust dimensions, total gate ≥90 with every dimension ≥80% and no hard blocker. Chinese first round: 92 with a rule/UI HOLD; final round: **95**, HOLD released after actual official-rule/editor verification. X: **94**, exact approved text published once. Full records and hashes: [docs/promotion/REVIEW.md](docs/promotion/REVIEW.md).
+- Publishing agent and reviewer independently executed the article's two full mjs examples. Actual reproduction lines and both PATCH regression suites passed. Before submission, all seven editor code blocks matched verified source, and the uploaded real image loaded at 1088×300. The article's simulations, version scope and business-specific strategy remained explicit; no database incident or all-version guarantee was invented.
+- CSDN AI-assisted declaration and body disclosure were retained, access public, GitCode backup off, multi-platform publication No. X's supported AI disclosure was enabled; no unrelated tags, mentions, reply spam, paid promotion or contest enrollment occurred.
+- Full publication state, platform checks, source copy and local screenshot locations: [docs/promotion/PUBLISHED.md](docs/promotion/PUBLISHED.md). These screenshots were visually inspected. No independent readership, star growth, award or recommendation claim is made from these posts or editorial scores.
+
+This follow-through changes publication documentation only. Product code, dependencies, original screenshot and parent-directory research remain unchanged. Existing browser/platform limitations and future moderation/traffic uncertainty still apply. The public article Copy button was not separately tested after publication; exact code preservation was verified in the editor before submission.

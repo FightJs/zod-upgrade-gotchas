@@ -14,6 +14,8 @@ A crop of the [original production-preview screenshot](docs/images/default-parti
 
 **Source:** [FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas) · [Three-case quick reference](#quick-reference). This is an independent reference, not a project compatibility audit.
 
+Published walkthrough: [Chinese technical article on CSDN](https://blog.csdn.net/qq_73599840/article/details/170767797) · [English short demo on X](https://x.com/Dearzxcte/status/2121431356874097064).
+
 ## Run locally
 
 Use Node.js 22 LTS and npm. Local acceptance passed under Node 20.13.0 / npm 10.8.0; GitHub Pages CI additionally passed installation, all 9 tests, TypeScript and the production build under Node 22.23.4.
@@ -112,7 +114,7 @@ The [live demo](https://fightjs.github.io/zod-upgrade-gotchas/) is hosted on Git
 
 The manual-only workflow builds and publishes `dist/`, including the application license and third-party notices. Relative asset URLs and hash-based case links work under the project subdirectory without server rewrites. Pushing a commit does not trigger a deployment automatically; see [DEPLOYMENT.md](DEPLOYMENT.md).
 
-English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). These remain unpublished drafts awaiting the publisher's platform/account targets. The page's source link defaults to this repository; `VITE_SOURCE_URL` can override it at build time.
+English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). The reviewed Chinese article and English short post were published on CSDN and X on 2026-11-14; actual links and limits are recorded there. The page's source link defaults to this repository; `VITE_SOURCE_URL` can override it at build time.
 
 ## License
 
