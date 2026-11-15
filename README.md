@@ -1,54 +1,35 @@
 # Zod Upgrade Gotchas
 
-**Zod 3 → 4: both validators can pass while their parsed outputs differ.**
+**两边都校验通过，并不意味着解析后的数据相同。**
 
-Run three fixed upgrade cases in your browser using the actual **Zod 3.25.76** and **4.6.7** packages. Edit JSON and compare the returned data or original issues.
+把 Zod 3 升级到 Zod 4 时，最容易漏掉的变化有时不是报错，而是 `safeParse` 返回了不同的数据。这个小工具把三个值得单独检查的变化放在一起：用真实的 Zod 包运行固定 schema，修改 JSON 后并排查看结果，并生成可在 Node.js 中运行的复现代码。
 
-**[Try the live default case](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)** · [Run locally](#run-locally) · [Deployment details](DEPLOYMENT.md)
+**[打开在线示例](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial)** · [三个案例](#三个案例) · [本地运行](#本地运行) · [如何贡献案例](#贡献案例)
 
-Same input: `{"b":"changed"}`. Both pass; only v4 adds the omitted default field:
+![页面实际运行结果：两个版本均通过校验，但 Zod 4 的结果多出了默认字段 a](docs/images/default-partial-results.png)
 
-![Real result: Zod 3 returns only b; Zod 4 also returns a, with both validations passing](docs/images/default-partial-results.png)
+上图是实际页面截图的裁剪。输入为 `{"b":"changed"}`：Zod 3 返回原有的 `b`，Zod 4 还返回了默认值 `a`。如果后续代码直接把解析结果写入数据库，这个差异就值得在升级前检查。它是否影响业务，仍取决于你的写入逻辑。
 
-A crop of the [original production-preview screenshot](docs/images/default-partial.png), captured on 2026-11-13. No results were redrawn or synthesized.
+## 三分钟了解它能做什么
 
-**Source:** [FightJs/zod-upgrade-gotchas](https://github.com/FightJs/zod-upgrade-gotchas) · [Three-case quick reference](#quick-reference). This is an independent reference, not a project compatibility audit.
+1. [打开在线页面](https://fightjs.github.io/zod-upgrade-gotchas/)，选择一个案例。页面会先运行该案例的默认输入。
+2. 修改 JSON，点击 **Run both versions**，查看两个版本各自返回的数据或原始 `issues`。
+3. 使用 **Copy reproduction code** 复制复现代码，在自己的 Node.js 环境中运行；复制内容包含最后一次运行的输入和固定版本。
+4. 使用 **Share case** 分享案例入口。链接只包含案例编号，**不包含你编辑的输入或结果**；接收者看到的是该案例的默认输入。
 
-Published walkthrough: [Chinese technical article on CSDN](https://blog.csdn.net/qq_73599840/article/details/170767797) · [English short demo on X](https://x.com/Dearzxcte/status/2121431356874097064).
+页面中运行的是真实 npm 包 **Zod 3.25.76** 和 **Zod 4.6.7**，通过 npm 别名分别安装。每次运行时，两边各自构造 schema，并接收独立的输入副本。页面不支持自由输入 schema、切换版本或扫描项目，也不能代替项目级兼容性测试。
 
-## Run locally
+## 三个案例
 
-Use Node.js 22 LTS and npm. Local acceptance passed under Node 20.13.0 / npm 10.8.0; GitHub Pages CI additionally passed installation, all 9 tests, TypeScript and the production build under Node 22.23.4.
+以下结果来自固定版本和表中输入；点击案例名称可打开对应页面。两个版本的错误信息直接展示，不做错误码归一化。
 
-```sh
-git clone https://github.com/FightJs/zod-upgrade-gotchas.git
-cd zod-upgrade-gotchas
-npm ci
-npm run dev
-```
-
-Open the local URL printed by Vite (normally http://127.0.0.1:5173).
-
-```sh
-npm test          # Real packages, runner, boundaries, exceptions, executable copied snippets
-npm run check    # TypeScript, including tests
-npm run build    # Static output in dist/
-npm run preview  # Production preview, normally http://127.0.0.1:4173
-```
-
-## Quick reference
-
-These are observed default results, not simulated fixtures in the webpage. Both versions construct their own schema and receive independent input copies on every run.
-
-| Case / fixed fragment | Input | Zod 3.25.76 | Zod 4.6.7 |
+| 案例 | 输入 | Zod 3.25.76 | Zod 4.6.7 |
 | --- | --- | --- | --- |
-| [Defaults + partial](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial) | `{"b":"changed"}` | Pass → `{"b":"changed"}` | Pass → `{"a":"a","b":"changed"}` |
-| [Integer range](https://fightjs.github.io/zod-upgrade-gotchas/#case=integer-range) | `9007199254740992` | Pass → `9007199254740992` | Fail → `too_big`, maximum `9007199254740991` |
-| [Enum-key record](https://fightjs.github.io/zod-upgrade-gotchas/#case=enum-record) | `{"a":1}` | Pass → `{"a":1}` | Fail → `invalid_type` at `["b"]`, expected `number` |
+| [默认值与 partial](https://fightjs.github.io/zod-upgrade-gotchas/#case=default-partial) | `{"b":"changed"}` | 通过，返回 `{"b":"changed"}` | 通过，返回 `{"a":"a","b":"changed"}` |
+| [安全整数边界](https://fightjs.github.io/zod-upgrade-gotchas/#case=integer-range) | `9007199254740992` | 通过 | 失败：超过安全整数上限 |
+| [枚举键 record](https://fightjs.github.io/zod-upgrade-gotchas/#case=enum-record) | `{"a":1}` | 通过 | 失败：缺少键 `b` |
 
-To open a fixed case, append `#case=default-partial`, `#case=integer-range`, or `#case=enum-record` to the running app URL.
-
-### 1. Defaults inside a partial object
+### 1. `.partial()` 中的默认值
 
 ```js
 z.object({
@@ -57,71 +38,70 @@ z.object({
 }).partial()
 ```
 
-In v4, the omitted `a` receives its default even inside `.partial()`. A PATCH handler that writes parsed data could write an additional field. Explicit input `{"a":"x","b":"y"}` produces the same output in both versions.
+对 `{"b":"changed"}`，两个版本都通过；v4 会为缺失的 `a` 填入默认值。可再输入 `{"a":"x","b":"y"}` 作为对照：两个版本的返回值相同。
 
-Source: [Zod issue #6627](https://github.com/colinhacks/zod/issues/6627).
+**升级时检查：** 解析结果是否被用于 PATCH、合并更新或生成写入对象。先看实际写入逻辑，再决定是否需要调整 schema。背景可参阅 [Zod issue #6627](https://github.com/colinhacks/zod/issues/6627)。
 
-### 2. Safe integer range
+### 2. 整数不一定是安全整数
 
 ```js
 z.number().int()
 ```
 
-v4 requires safe integers. `9007199254740992` is an integer but exceeds `Number.MAX_SAFE_INTEGER`; it passes v3 and fails v4. Input `42` passes both with output `42`. JavaScript JSON numbers already use IEEE-754: arbitrary large decimal integers are not losslessly preserved.
+`9007199254740992` 是整数，但超过 `Number.MAX_SAFE_INTEGER`。在本工具固定的版本中，v3 接受它，v4 拒绝它；`42` 则在两边都通过。
 
-Source: [Official migration guide: numbers](https://zod.dev/v4/changelog#znumber).
+JSON 数字在 JavaScript 中使用 IEEE-754 双精度表示，任意大十进制整数本身就无法保证无损。这里比较的是两个版本对已解析数字的行为，不提供大整数精度修复。参阅 [Zod 4 迁移说明：number](https://zod.dev/v4/changelog#znumber)。
 
-### 3. Exhaustive enum keys
+### 3. 枚举键需要完整出现
 
 ```js
 z.record(z.enum(['a', 'b']), z.number())
 ```
 
-v4 requires both enum keys. Missing `b` fails; input `{"a":1,"b":2}` passes both. The page shows each version's original issues without normalizing error codes or messages.
+输入 `{"a":1}` 时，v3 接受缺失的 `b`，v4 要求枚举中的键全部存在。将输入改为 `{"a":1,"b":2}`，两个版本均通过。参阅 [Zod 4 迁移说明：record](https://zod.dev/v4/changelog#zrecord)。
 
-Source: [Official migration guide: records](https://zod.dev/v4/changelog#zrecord).
+## 输入、隐私与边界
 
-## Behavior and limits
+- 可编辑的是 **JSON 数据**，不是 JavaScript 或 schema。输入上限为 UTF-8 编码后 20 KiB，最多 20 层对象/数组；非法 JSON 和非有限数值不会进入 Zod。
+- 修改输入后，旧结果会清空，需要重新运行才能复制复现代码。某一侧执行异常时会显示 **Incomplete**，不把异常当作两个版本结果相同。
+- 输入和结果只在当前页面处理，不上传、不持久化。页面使用文本方式展示结果，不执行输入中的代码。
+- 剪贴板不可用时，页面提供可手动复制的只读文本框；浏览器剪贴板通常要求 HTTPS 或 localhost。
+- 三个案例是有边界的参考，不代表完整迁移清单，也不证明你的项目存在缺陷。请对自己的 schema、数据和写入路径补充测试。
 
-- Initial load, case selection, and Restore default run automatically. Editing clears previous results and disables copying until valid input is run again.
-- Copy reproduction code includes the actual last-run input, exact npm alias installation instructions, both factories, and a `node repro.mjs` command. The generated snippets are executed in automated tests.
-- Share case copies only the fixed case ID in a URL fragment. It never encodes edited input or results. Opening/reloading the link runs that case's default input. Unknown IDs fall back to the first case with a notice.
-- Clipboard failure reveals a focused, selected, read-only textarea for manual copying. Clipboard APIs normally require HTTPS or localhost.
-- Only JSON is editable. Input must be at most 20 KiB in UTF-8, with at most 20 nested object/array containers; the outermost container counts as one. Non-finite parsed numbers such as `1e400` are rejected to keep copied reproductions faithful.
-- Invalid JSON and limit violations do not run Zod. Execution exceptions are shown as **Incomplete**, independently for each side. They never imply equal results.
-- Inputs and results use text rendering. Nothing is uploaded or persisted. No external fonts, analytics, arbitrary JS execution, backend, or version switching.
-- These three examples do not check your project's compatibility, establish that Zod has a bug, or predict business impact for all inputs.
+## 本地运行
 
-Two separate published packages are pinned via npm aliases, not the `/v3` entry point of a v4 package. `package-lock.json` locks the install. The app is Vite + TypeScript + native DOM/CSS, with no runtime UI framework or diff library.
+建议使用 Node.js 22 和 npm。首次安装依赖需要网络。
 
-## Browser verification
-
-The public HTTPS demo was exercised in Chromium at desktop, 375px, and 320px widths on 2026-11-13. All three fixed links open and refresh with their defaults; clipboard, source backlink and interaction checks passed. See [VERIFICATION.md](VERIFICATION.md) for outcomes and gaps. The release screenshot above is included in `docs/images/`; additional local screenshots and the latest browser log are under `output/playwright/` (ignored by Git).
-
-To repeat the browser assertions, start `npm run preview` on port 4173 in another terminal, then use the Playwright CLI (a test-only tool, not an app dependency):
-
-```sh
-mkdir -p output/playwright
-npx --yes --package @playwright/cli playwright-cli -s=zod open http://127.0.0.1:4173/
-npx --yes --package @playwright/cli playwright-cli -s=zod run-code "$(cat tests/browser-check.js)"
+```bash
+git clone https://github.com/FightJs/zod-upgrade-gotchas.git
+cd zod-upgrade-gotchas
+npm ci
+npm run dev
 ```
 
-A compatible Chromium/Chrome installation is required. Browser tests use real clipboard permissions for the success path and deliberately reject clipboard writes for the fallback path.
+打开终端输出的本地地址。其他常用命令：
 
-## Static publication
+```bash
+npm test          # 运行真实版本及复现代码等测试
+npm run check     # TypeScript 检查
+npm run build     # 构建静态文件到 dist/
+npm run preview   # 预览生产构建
+```
 
-The [live demo](https://fightjs.github.io/zod-upgrade-gotchas/) is hosted on GitHub Pages. The [first deployment and its checks](https://github.com/FightJs/zod-upgrade-gotchas/actions/runs/43445983076) succeeded on 2026-11-13; the hosted HTTPS acceptance is recorded in [VERIFICATION.md](VERIFICATION.md).
+依赖版本由 `package.json` 和 `package-lock.json` 固定。项目使用 Vite、TypeScript 和原生 DOM；两个 Zod 版本是独立安装的包，并非把 v4 包的 `/v3` 入口当作另一个版本。
 
-The manual-only workflow builds and publishes `dist/`, including the application license and third-party notices. Relative asset URLs and hash-based case links work under the project subdirectory without server rewrites. Pushing a commit does not trigger a deployment automatically; see [DEPLOYMENT.md](DEPLOYMENT.md).
+## 验证与延伸阅读
 
-English and Chinese first-post copy is in [LAUNCH.md](LAUNCH.md). The reviewed Chinese article and English short post were published on CSDN and X on 2026-11-14; actual links and limits are recorded there. The page's source link defaults to this repository; `VITE_SOURCE_URL` can override it at build time.
+2026-11-13 的发布验收覆盖了真实包运行、三个默认案例及对照输入、复制复现代码、固定案例链接和 Chromium 窄屏交互。具体环境、结果与未覆盖的浏览器列在 [VERIFICATION.md](VERIFICATION.md)；部署方式见 [DEPLOYMENT.md](DEPLOYMENT.md)。验证记录是当时的结果，并非对所有浏览器或未来版本的保证。
 
-## License
+- [默认值案例的中文技术文章](https://blog.csdn.net/qq_73599840/article/details/170767797)
+- [三个案例的来源与固定实现](src/lab.ts)
+- [在线应用](https://fightjs.github.io/zod-upgrade-gotchas/) · [问题反馈](https://github.com/FightJs/zod-upgrade-gotchas/issues)
 
-This application is licensed under the [MIT License](LICENSE), selected with the publisher's authorization on 2026-11-13.
+## 贡献案例
 
-Third-party dependencies retain their own licenses and copyrights. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) preserves the two Zod runtime packages' license and copyright notices. Static deployment includes both `LICENSE.txt` and `THIRD_PARTY_NOTICES.txt`.
+欢迎提交能独立复现的升级差异。请在 issue 中附上：官方文档或相关 issue、确切版本、最小 schema、JSON 输入、两个版本的实际返回值，以及一个结果相同的对照输入。先确认行为，再讨论是否加入页面；一个有证据的小案例比未经验证的长清单更有用。
 
-## Contributing verified cases
+## 许可证
 
-Propose a case with its official source or issue, exact package versions, minimal schema, JSON input, observed outputs/issues, and an equal-result control. Verify behavior before changing explanations. Prefer a small, evidenced case over new platform features.
+本项目使用 [MIT License](LICENSE)。第三方依赖保留各自的许可证和版权声明；Zod 的相关声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
